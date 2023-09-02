@@ -7,6 +7,14 @@
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "noImplicitOverride": true,
+    "paths": {
+      "@form-builder/*": [
+        "projects/form-builder/*"
+      ],
+      "@form-builder": [
+        "projects/form-builder"
+      ]
+    },
     "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,

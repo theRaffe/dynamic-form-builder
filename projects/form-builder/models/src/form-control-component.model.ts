@@ -1,6 +1,6 @@
-import { FormGroup } from "@angular/forms";
+import { AbstractControl, FormGroup } from "@angular/forms";
 
 export interface FormControlComponent {
-    formGroup: FormGroup;
-    formControlName: string;
+    formGroup?: FormGroup;
+    formControlInput: AbstractControl | null;
 }

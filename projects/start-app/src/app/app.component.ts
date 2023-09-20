@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { InputStructure } from '@form-builder/models';
 
 @Component({
@@ -6,12 +6,43 @@ import { InputStructure } from '@form-builder/models';
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.css'],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
+    public initialInputs!: InputStructure[];
+    
+    ngOnInit(): void {
+        this.initialInputs = [
+            {
+                name: 'step1',
+                title: 'Step 1',
+                type: 'container',
+                children: [
+                    {
+                        name: 'fullName',
+                        title: 'Full Name',
+                        type: 'text',
+                        validations: {
+                            required: true,
+                        },
+                    },
+                    {
+                        name: 'nickname',
+                        title: 'Nickname',
+                        type: 'text',
+                        validations: {
+                            required: true,
+                        },
+                    },
+                ]
+            }
+            
+        ];
+    }
+
     title = 'start-app';
     public initialInput: InputStructure = {
         name: 'nickname',
-        required: true,
         title: 'Nickname',
         type: 'text',
     };
+
 }

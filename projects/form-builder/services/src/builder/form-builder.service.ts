@@ -2,8 +2,12 @@ import { Injectable } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { InputStructure } from '@form-builder/models';
 
+/**
+ * Service to create a formGroup given a list of InputStructure
+ */
 @Injectable()
 export class FormBuilderService {
+    
     constructor(private readonly formBuilder: FormBuilder) {}
 
     public buildForm(inputs: InputStructure[]): FormGroup {

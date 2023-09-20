@@ -1,1 +1,1 @@
-export * from './src/input-structure.model';
+export * from './src/index';

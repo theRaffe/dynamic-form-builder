@@ -1,1 +1,3 @@
-export * from './src/builder/form-builder.service';
+export * from './src/components/index';
+export * from '../services/src/config/index';
+

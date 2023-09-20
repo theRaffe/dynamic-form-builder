@@ -10,5 +10,8 @@
   },
   "exclude": [
     "**/*.spec.ts"
+  ],
+  "include": [
+    "shared/src/components/input-text/input-text.component.ts"
   ]
 }

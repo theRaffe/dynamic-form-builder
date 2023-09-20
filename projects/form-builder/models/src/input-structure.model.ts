@@ -1,7 +1,12 @@
 
 export type typeInput = "text" | "date" | "number" | "select" | "container";
-export interface validationRequired { required: boolean };
-export interface validationRange { min: number, max: number };
+export interface validationRequired { 
+    required: boolean;
+}
+export interface validationRange { 
+    min: number; 
+    max: number;
+}
 
 export interface InputStructure {
     name: string;

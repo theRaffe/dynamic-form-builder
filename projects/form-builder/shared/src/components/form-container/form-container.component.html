@@ -1,0 +1,10 @@
+<main>
+    <ul>
+        <li *ngFor="let containerTab of allTabs">
+            {{containerTab.title}}
+        </li>
+    </ul>
+    <section *ngFor="let containerTab of allTabs">
+        <ng-template #dynamic></ng-template>
+    </section>
+</main>

@@ -4,7 +4,9 @@
             {{containerTab.title}}
         </li>
     </ul>
-    <section *ngFor="let containerTab of allTabs">
-        <ng-template #dynamic></ng-template>
+    <section *ngFor="let containerTab of allTabs" class="tab-body">
+        <div *ngFor="let inputControl of containerTab.inputs" class="row">
+            <ng-template #dynamic></ng-template>
+        </div>
     </section>
 </main>

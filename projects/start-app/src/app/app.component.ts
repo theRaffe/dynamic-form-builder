@@ -33,6 +33,29 @@ export class AppComponent implements OnInit {
                         },
                     },
                 ]
+            },
+            {
+                name: 'step2',
+                title: 'Step 2',
+                type: 'container',
+                children: [
+                    {
+                        name: 'fullName2',
+                        title: 'Full Name2',
+                        type: 'text',
+                        validations: {
+                            required: true,
+                        },
+                    },
+                    {
+                        name: 'nickname2',
+                        title: 'Nickname2',
+                        type: 'text',
+                        validations: {
+                            required: true,
+                        },
+                    },
+                ]
             }
             
         ];

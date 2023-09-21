@@ -1,6 +1,10 @@
 import { ComponentRef, Injectable, ViewContainerRef } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { FormControlComponent, InputStructure } from '@form-builder/models';
+import {
+    ComponentRefDictType,
+    FormControlComponent,
+    InputStructure,
+} from '@form-builder/models';
 import { ConfigComponentService } from '../config/config-components';
 
 /**
@@ -9,6 +13,12 @@ import { ConfigComponentService } from '../config/config-components';
 @Injectable()
 export class InputControlBuilderService {
     private componentRefs: ComponentRef<any>[] = [];
+    private componentRefsDict: ComponentRefDictType = {};
+
+    public get formControlsDict() {
+        return { ...this.componentRefsDict };
+    }
+
     // TODO: create a component that use ViewChildren of ViewContainerRef to get all tab containers
     // see: https://medium.com/@teslenkooleg2017/angular-13-create-multiple-dynamic-components-using-directive-ngfor-effe0850a69d
 
@@ -20,7 +30,7 @@ export class InputControlBuilderService {
      * @param inputs list of input fields to render
      * @param vcr container object where to render inputs
      * @param formGroup form that contains fields of the inputs
-     * @returns 
+     * @returns
      */
     public async buildControls(
         inputs: InputStructure[],
@@ -35,14 +45,24 @@ export class InputControlBuilderService {
             ]);
 
         for (const input of inputs) {
-            const clazzComponent = componentTypes[input.type];
-            const newComponentRef = vcr.createComponent(clazzComponent);
-            const formControlComponent = <FormControlComponent>(
-                newComponentRef.instance
-            );
-            formControlComponent.formControlInput = formGroup.get(input.name);
-            this.componentRefs.push(newComponentRef);
-            console.log({newComponentRef});
+            if (!this.componentRefsDict[input.name]) {
+                const clazzComponent = componentTypes[input.type];
+                const newComponentRef = vcr.createComponent(clazzComponent);
+                const formControlComponent = <FormControlComponent>(
+                    newComponentRef.instance
+                );
+                formControlComponent.formControlInput = formGroup.get(
+                    input.name
+                );
+                formControlComponent.placeholder = input.title;
+                this.componentRefs.push(newComponentRef);
+                this.componentRefsDict[input.name] = newComponentRef;
+                console.log({ newComponentRef });
+            } else {
+                console.warn(
+                    `Already exists a form control with name ${input.name}`
+                );
+            }
         }
 
         return this.componentRefs;
@@ -57,10 +77,6 @@ export class InputControlBuilderService {
         return inputs.filter((input) => input.type === 'container');
     }
 
-    public initializeFormContainer(inputs: InputStructure[]) {
-        const containers = this.getContainers(inputs);
-    }
-
     private getInputTypes(inputs: InputStructure[]): any[] {
         const result = [];
         for (const input of inputs) {
@@ -72,5 +88,17 @@ export class InputControlBuilderService {
         }
 
         return result;
+    }
+
+    /**
+     * method iterates componentRefs dictionary and frees the memory of each ComponentRef to avoid memory leak.
+     */
+    public releaseComponents():void {
+        const allInputName = Object.keys(this.componentRefsDict);
+        for(const inputName of allInputName) {
+            this.componentRefsDict[inputName].destroy();
+        }
+
+        this.componentRefsDict = {};
     }
 }

@@ -1,15 +1,18 @@
 import {
     AfterViewInit,
     Component,
+    EventEmitter,
     Input,
     OnChanges,
+    OnDestroy,
+    Output,
     QueryList,
     SimpleChanges,
     ViewChildren,
     ViewContainerRef,
 } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { InputStructure } from '@form-builder/models';
+import { FormGroupOutput, InputStructure } from '@form-builder/models';
 import {
     FormBuilderService,
     InputControlBuilderService,
@@ -28,7 +31,7 @@ interface TabContainer {
     templateUrl: './form-container.component.html',
     styleUrls: ['./form-container.component.css'],
 })
-export class FormContainerComponent implements AfterViewInit, OnChanges {
+export class FormContainerComponent implements AfterViewInit, OnChanges, OnDestroy {
     public allContainers: InputStructure[] = [];
     public allTabs: TabContainer[] = [];
     private _formGroup!: FormGroup;
@@ -38,11 +41,23 @@ export class FormContainerComponent implements AfterViewInit, OnChanges {
 
     @Input()
     public inputs: InputStructure[] = [];
+    
+    /**
+     * this event notifies when formGroup and components are ready
+     */
+    @Output()
+    public formGroupOutput: EventEmitter<FormGroupOutput> = new EventEmitter();
+
+    public allInputFormControl!: InputStructure[];
 
     constructor(
         private readonly formBuilderService: FormBuilderService,
         private readonly inputControlBuilderService: InputControlBuilderService
     ) {}
+
+    ngOnDestroy(): void {
+        this.inputControlBuilderService.releaseComponents();
+    }
 
     ngOnChanges(changes: SimpleChanges): void {
         if (!!changes['inputs'].currentValue) {
@@ -55,21 +70,11 @@ export class FormContainerComponent implements AfterViewInit, OnChanges {
             .pipe(
                 tap((containers: QueryList<ViewContainerRef>) => {
                     console.log({ containers });
-                    // containers.map((vcr: ViewContainerRef, index: number) => {
-                    //     vcr.clear();
-                    //     const inputs = this.allTabs[index].inputs;
-                    //     console.log('execute component:', index);
-                    //     this.inputControlBuilderService.buildControls(
-                    //         inputs,
-                    //         vcr,
-                    //         this._formGroup
-                    //     );
-                    // });
                     this.renderFormControlComponents(containers);
                 })
             )
             .subscribe();
-        console.log({ dynamicContainers: this.dynamicContainers });
+        
         if (!!this.dynamicContainers) {
             this.renderFormControlComponents(this.dynamicContainers);
         }
@@ -80,14 +85,18 @@ export class FormContainerComponent implements AfterViewInit, OnChanges {
     ): void {
         containers.map((vcr: ViewContainerRef, index: number) => {
             vcr.clear();
-            const inputs = this.allTabs[index].inputs;
-            console.log('execute component:', index);
+            const input = this.allInputFormControl[index];
             this.inputControlBuilderService.buildControls(
-                inputs,
+                [input],
                 vcr,
                 this._formGroup
             );
         });
+        
+        this.formGroupOutput.emit({
+            componentRefDict: this.inputControlBuilderService.formControlsDict,
+            formGroup: this._formGroup
+        })
     }
 
     public initalizeForm(inputs: InputStructure[]): void {
@@ -113,5 +122,7 @@ export class FormContainerComponent implements AfterViewInit, OnChanges {
         } else {
             this.allTabs = allTabs;
         }
+
+        this.allInputFormControl = this.allTabs.flatMap(tab => tab.inputs);
     }
 }

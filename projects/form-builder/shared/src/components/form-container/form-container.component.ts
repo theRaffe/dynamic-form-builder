@@ -31,7 +31,9 @@ interface TabContainer {
     templateUrl: './form-container.component.html',
     styleUrls: ['./form-container.component.css'],
 })
-export class FormContainerComponent implements AfterViewInit, OnChanges, OnDestroy {
+export class FormContainerComponent
+    implements AfterViewInit, OnChanges, OnDestroy
+{
     public allContainers: InputStructure[] = [];
     public allTabs: TabContainer[] = [];
     private _formGroup!: FormGroup;
@@ -41,7 +43,7 @@ export class FormContainerComponent implements AfterViewInit, OnChanges, OnDestr
 
     @Input()
     public inputs: InputStructure[] = [];
-    
+
     /**
      * this event notifies when formGroup and components are ready
      */
@@ -74,7 +76,7 @@ export class FormContainerComponent implements AfterViewInit, OnChanges, OnDestr
                 })
             )
             .subscribe();
-        
+
         if (!!this.dynamicContainers) {
             this.renderFormControlComponents(this.dynamicContainers);
         }
@@ -92,11 +94,11 @@ export class FormContainerComponent implements AfterViewInit, OnChanges, OnDestr
                 this._formGroup
             );
         });
-        
+
         this.formGroupOutput.emit({
             componentRefDict: this.inputControlBuilderService.formControlsDict,
-            formGroup: this._formGroup
-        })
+            formGroup: this._formGroup,
+        });
     }
 
     public initalizeForm(inputs: InputStructure[]): void {
@@ -123,6 +125,6 @@ export class FormContainerComponent implements AfterViewInit, OnChanges, OnDestr
             this.allTabs = allTabs;
         }
 
-        this.allInputFormControl = this.allTabs.flatMap(tab => tab.inputs);
+        this.allInputFormControl = this.allTabs.flatMap((tab) => tab.inputs);
     }
 }

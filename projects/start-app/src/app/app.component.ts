@@ -42,7 +42,7 @@ export class AppComponent implements OnInit {
                     {
                         name: 'fullName2',
                         title: 'Full Name2',
-                        type: 'text',
+                        type: 'mat-input-text',
                         validations: {
                             required: true,
                         },
@@ -50,7 +50,7 @@ export class AppComponent implements OnInit {
                     {
                         name: 'nickname2',
                         title: 'Nickname2',
-                        type: 'text',
+                        type: 'mat-input-text',
                         validations: {
                             required: true,
                         },

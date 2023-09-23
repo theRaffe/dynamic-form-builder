@@ -1,12 +1,17 @@
 <main>
-    <ul>
-        <li *ngFor="let containerTab of allTabs">
-            {{containerTab.title}}
-        </li>
-    </ul>
-    <section *ngFor="let containerTab of allTabs" class="tab-body">
-        <div *ngFor="let inputControl of containerTab.inputs" class="row">
-            <ng-template #dynamic></ng-template>
-        </div>
-    </section>
+    <mat-tab-group>
+        <mat-tab
+            *ngFor="let containerTab of allTabs"
+            [label]="containerTab.title"
+            >
+            <section class="tab-body">
+                <div
+                    *ngFor="let inputControl of containerTab.inputs"
+                    class="row"
+                >
+                    <ng-template #dynamic></ng-template>
+                </div>
+            </section>
+        </mat-tab>
+    </mat-tab-group>
 </main>

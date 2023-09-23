@@ -4,5 +4,6 @@ export enum ComponentTypeEnum {
     InputDate = 'date',
     InputSelect = 'select',
     InputRadio = 'radio',
-    Container = 'container'
+    Container = 'container',
+    MatInputText = 'mat-input-text',
 };

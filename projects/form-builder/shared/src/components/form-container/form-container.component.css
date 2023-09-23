@@ -1,0 +1,9 @@
+:host {
+    .tab-body {
+        padding: 1rem .5rem;
+    }
+
+    .tab-body .row {
+        margin: .25rem 0;
+    }
+}

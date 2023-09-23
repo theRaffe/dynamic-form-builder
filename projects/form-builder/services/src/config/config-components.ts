@@ -16,7 +16,9 @@ export class ConfigComponentService {
             [ComponentTypeEnum.InputNumber]: { type: 'input-number', className: 'InputNumberComponent' },
             [ComponentTypeEnum.InputRadio]: { type: 'input-radio', className: 'InputRadioComponent' },
             [ComponentTypeEnum.InputSelect]: { type: 'input-select', className: 'InputSelectComponent' },
-            [ComponentTypeEnum.InputText]: { type: 'input-text', className: 'InputTextComponent' }
+            [ComponentTypeEnum.InputText]: { type: 'input-text', className: 'InputTextComponent' },
+            [ComponentTypeEnum.MatInputText]: { type: 'custom-mat-input-text', className: 'CustomMatInputTextComponent' }
+
         };
 
         

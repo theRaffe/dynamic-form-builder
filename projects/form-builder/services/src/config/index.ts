@@ -1,1 +1,1 @@
-export * from './config-components';
+export * from './config-components.service';

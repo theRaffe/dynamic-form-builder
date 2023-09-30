@@ -1,5 +1,5 @@
 import { ComponentTypeEnum } from "@form-builder/models";
-import { ConfigComponentService } from "./config-components";
+import { ConfigComponentService } from "./config-components.service";
 import { TestBed } from "@angular/core/testing";
 import { InputTextComponent } from "../../../shared/src/components/input-text/input-text.component";
 

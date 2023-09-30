@@ -55,6 +55,32 @@ export class AppComponent implements OnInit {
                             required: true,
                         },
                     },
+                    {
+                        name: 'language',
+                        title: 'Programing Languages',
+                        type: 'mat-input-select',
+                        validations: {
+                            required: true,
+                        },
+                        options: [
+                            {
+                                description: 'Javascript',
+                                code: 'Javascript'
+                            },
+                            {
+                                description: 'Python',
+                                code: 'Python'
+                            },
+                            {
+                                description: 'Rust',
+                                code: 'Rust'
+                            },
+                            {
+                                description: 'Java',
+                                code: 'Java'
+                            },
+                        ]
+                    },
                 ]
             }
             

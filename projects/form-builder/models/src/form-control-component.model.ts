@@ -4,5 +4,6 @@ export interface FormControlComponent {
     formGroup?: FormGroup;
     formControlInput: AbstractControl | null;
     placeholder: string;
+    options?: any[];
 }
 

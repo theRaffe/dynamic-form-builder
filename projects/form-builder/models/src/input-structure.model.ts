@@ -1,5 +1,5 @@
 
-export type typeInput = "text" | "date" | "number" | "select" | "container" | "mat-input-text";
+export type typeInput = "text" | "date" | "number" | "select" | "container" | "mat-input-text" | "mat-input-select";
 export interface validationRequired { 
     required: boolean;
 }

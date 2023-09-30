@@ -17,7 +17,9 @@ export class ConfigComponentService {
             [ComponentTypeEnum.InputRadio]: { type: 'input-radio', className: 'InputRadioComponent' },
             [ComponentTypeEnum.InputSelect]: { type: 'input-select', className: 'InputSelectComponent' },
             [ComponentTypeEnum.InputText]: { type: 'input-text', className: 'InputTextComponent' },
-            [ComponentTypeEnum.MatInputText]: { type: 'custom-mat-input-text', className: 'CustomMatInputTextComponent' }
+            [ComponentTypeEnum.MatInputText]: { type: 'custom-mat-input-text', className: 'CustomMatInputTextComponent' },
+            [ComponentTypeEnum.MatInputSelect]: { type: 'custom-mat-input-select', className: 'CustomMatInputSelectComponent' }
+
 
         };
 
@@ -26,9 +28,6 @@ export class ConfigComponentService {
             if (!this.resultTypeDict[inputType]) {
                 const type = componentTypeDict[inputType].type;
                 const className = componentTypeDict[inputType].className;
-                // import(`@form-builder/shared`).then(m => m.)
-                // const lazyContentComponent = await import(`@form-builder/shared/src/components/${type}/${type}.component`);
-                //const lazyContentComponent = await import(`@form-builder/shared`);
                 const lazyContentComponent = await import(`../../../shared/src/components/${type}/${type}.component`);
 
                 const componentClassName = lazyContentComponent[className];

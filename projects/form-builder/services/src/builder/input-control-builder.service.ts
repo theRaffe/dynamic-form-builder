@@ -5,7 +5,7 @@ import {
     FormControlComponent,
     InputStructure,
 } from '@form-builder/models';
-import { ConfigComponentService } from '../config/config-components';
+import { ConfigComponentService } from '../config/config-components.service';
 
 /**
  * Service to create different formControls given a list of `InputStructure`
@@ -55,6 +55,9 @@ export class InputControlBuilderService {
                     input.name
                 );
                 formControlComponent.placeholder = input.title;
+                if (!!input.options) {
+                    formControlComponent.options = input.options;
+                }
                 this.componentRefs.push(newComponentRef);
                 this.componentRefsDict[input.name] = newComponentRef;
                 console.log({ newComponentRef });

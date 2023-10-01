@@ -1,10 +1,19 @@
+import { ComponentTypeEnum } from "./component-types";
 
-export type typeInput = "text" | "date" | "number" | "select" | "container" | "mat-input-text" | "mat-input-select";
-export interface validationRequired { 
+export type typeInput =
+    | 'text'
+    | 'date'
+    | 'number'
+    | 'select'
+    | 'container'
+    | 'mat-input-text'
+    | 'mat-input-select'
+    | 'mat-input-multicheck';
+export interface validationRequired {
     required: boolean;
 }
-export interface validationRange { 
-    min: number; 
+export interface validationRange {
+    min: number;
     max: number;
 }
 
@@ -16,7 +25,7 @@ export interface InputStructure {
     children?: InputStructure[];
     options?: any[];
     validations?: {
-        required? :boolean;
+        required?: boolean;
         range?: validationRange;
-    }
+    };
 }

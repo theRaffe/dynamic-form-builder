@@ -4,6 +4,9 @@ export interface FormControlComponent {
     formGroup?: FormGroup;
     formControlInput: AbstractControl | null;
     placeholder: string;
-    options?: any[];
 }
 
+export interface FormControlSelectComponent extends FormControlComponent {
+    options: any[];
+    isMultiple: boolean;
+}

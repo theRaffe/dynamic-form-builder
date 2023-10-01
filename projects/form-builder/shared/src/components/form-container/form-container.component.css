@@ -1,9 +1,20 @@
 :host {
+    .main-container {
+        height: 100%;
+        .mat-mdc-tab-group {
+            height: 100%;
+        }
+    }
+
     .tab-body {
         padding: 1rem .5rem;
     }
 
     .tab-body .row {
         margin: .25rem 0;
+    }
+
+    .remove-header .mat-mdc-tab-header {
+        display: none;
     }
 }

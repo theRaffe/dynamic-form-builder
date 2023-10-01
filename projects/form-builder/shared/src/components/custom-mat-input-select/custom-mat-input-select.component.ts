@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { FormControlComponent } from '@form-builder/models';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormControlComponent, FormControlSelectComponent } from '@form-builder/models';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
@@ -20,7 +20,8 @@ import { NgFor } from '@angular/common';
         NgFor,
     ],
 })
-export class CustomMatInputSelectComponent implements FormControlComponent {
+export class CustomMatInputSelectComponent implements FormControlSelectComponent {
+    formGroup?: FormGroup<any> | undefined;
     @Input()
     public formControlInput!: FormControl;
 
@@ -28,5 +29,8 @@ export class CustomMatInputSelectComponent implements FormControlComponent {
     placeholder = '';
 
     @Input()
-   options?: any[] | undefined; 
+    options!: any[];
+
+    @Input()
+    isMultiple!: boolean;
 }

@@ -18,8 +18,8 @@ export class ConfigComponentService {
             [ComponentTypeEnum.InputSelect]: { type: 'input-select', className: 'InputSelectComponent' },
             [ComponentTypeEnum.InputText]: { type: 'input-text', className: 'InputTextComponent' },
             [ComponentTypeEnum.MatInputText]: { type: 'custom-mat-input-text', className: 'CustomMatInputTextComponent' },
-            [ComponentTypeEnum.MatInputSelect]: { type: 'custom-mat-input-select', className: 'CustomMatInputSelectComponent' }
-
+            [ComponentTypeEnum.MatInputSelect]: { type: 'custom-mat-input-select', className: 'CustomMatInputSelectComponent' },
+            [ComponentTypeEnum.MatInputMulticheck]: { type: 'custom-mat-input-select', className: 'CustomMatInputSelectComponent' }
 
         };
 

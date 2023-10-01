@@ -1,5 +1,5 @@
-<main>
-    <mat-tab-group>
+<main class="main-container">
+    <mat-tab-group [ngClass]="{ 'remove-header': allTabs.length === 1 }">
         <mat-tab
             *ngFor="let containerTab of allTabs"
             [label]="containerTab.title"

@@ -2,8 +2,11 @@ import { ComponentRef, Injectable, ViewContainerRef } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import {
     ComponentRefDictType,
+    ComponentTypeEnum,
     FormControlComponent,
+    FormControlSelectComponent,
     InputStructure,
+    typeInput,
 } from '@form-builder/models';
 import { ConfigComponentService } from '../config/config-components.service';
 
@@ -55,12 +58,15 @@ export class InputControlBuilderService {
                     input.name
                 );
                 formControlComponent.placeholder = input.title;
-                if (!!input.options) {
-                    formControlComponent.options = input.options;
+                if (this.isInputSelect(input.type as ComponentTypeEnum)) {
+                    const controlInputSelect = formControlComponent as FormControlSelectComponent;
+                    controlInputSelect.options = input.options ?? [];
+                    if (input.type === 'mat-input-multicheck') {
+                        controlInputSelect.isMultiple = true;
+                    }
                 }
                 this.componentRefs.push(newComponentRef);
                 this.componentRefsDict[input.name] = newComponentRef;
-                console.log({ newComponentRef });
             } else {
                 console.warn(
                     `Already exists a form control with name ${input.name}`
@@ -69,6 +75,17 @@ export class InputControlBuilderService {
         }
 
         return this.componentRefs;
+    }
+
+    /**
+     * Determine if type is an input select
+     * 
+     * @param type to evaluate
+     * @returns true if param type is an input select
+     */
+    private isInputSelect(type: ComponentTypeEnum) {
+        const list = [ComponentTypeEnum.MatInputMulticheck, ComponentTypeEnum.MatInputSelect];
+        return list.includes(type);
     }
 
     /**
@@ -104,4 +121,6 @@ export class InputControlBuilderService {
 
         this.componentRefsDict = {};
     }
+
+
 }

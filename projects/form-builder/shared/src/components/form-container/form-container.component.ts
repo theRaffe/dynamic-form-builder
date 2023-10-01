@@ -30,6 +30,10 @@ interface TabContainer {
     selector: 'form-container',
     templateUrl: './form-container.component.html',
     styleUrls: ['./form-container.component.css'],
+    providers: [
+        FormBuilderService,
+        InputControlBuilderService,
+    ]
 })
 export class FormContainerComponent
     implements AfterViewInit, OnChanges, OnDestroy
@@ -121,10 +125,9 @@ export class FormContainerComponent
                 inputs: inputs,
                 isActive: true,
             });
-        } else {
-            this.allTabs = allTabs;
-        }
-
+        } 
+        
+        this.allTabs = allTabs;
         this.allInputFormControl = this.allTabs.flatMap((tab) => tab.inputs);
     }
 }

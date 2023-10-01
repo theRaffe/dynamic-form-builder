@@ -8,6 +8,8 @@ import { InputStructure } from '@form-builder/models';
 })
 export class AppComponent implements OnInit {
     public initialInputs!: InputStructure[];
+    public singleFormInputs!: InputStructure[];
+
     
     ngOnInit(): void {
         this.initialInputs = [
@@ -56,9 +58,28 @@ export class AppComponent implements OnInit {
                         },
                     },
                     {
+                        name: 'department',
+                        title: 'Area de Interes',
+                        type: 'mat-input-select',
+                        validations: {
+                            required: true,
+                        },
+                        options: [
+                            {
+                                description: "Frontend"
+                            },
+                            {
+                                description: "Backend"
+                            },
+                            {
+                                description: "Otro"
+                            }
+                        ]
+                    },
+                    {
                         name: 'language',
                         title: 'Programing Languages',
-                        type: 'mat-input-select',
+                        type: 'mat-input-multicheck',
                         validations: {
                             required: true,
                         },
@@ -85,6 +106,25 @@ export class AppComponent implements OnInit {
             }
             
         ];
+
+        this.singleFormInputs = [
+            {
+                name: 'fullName2',
+                title: 'Full Name2',
+                type: 'mat-input-text',
+                validations: {
+                    required: true,
+                },
+            },
+            {
+                name: 'nickname2',
+                title: 'Nickname2',
+                type: 'mat-input-text',
+                validations: {
+                    required: true,
+                },
+            },
+        ]
     }
 
     title = 'start-app';

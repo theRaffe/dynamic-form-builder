@@ -84,7 +84,7 @@ export class InputControlBuilderService {
      * @returns true if param type is an input select
      */
     private isInputSelect(type: ComponentTypeEnum) {
-        const list = [ComponentTypeEnum.MatInputMulticheck, ComponentTypeEnum.MatInputSelect];
+        const list = [ComponentTypeEnum.MatInputMulticheck, ComponentTypeEnum.MatInputSelect, ComponentTypeEnum.MatInputRadio];
         return list.includes(type);
     }
 

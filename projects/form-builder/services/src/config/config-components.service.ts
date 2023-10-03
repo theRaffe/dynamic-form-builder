@@ -19,7 +19,8 @@ export class ConfigComponentService {
             [ComponentTypeEnum.InputText]: { type: 'input-text', className: 'InputTextComponent' },
             [ComponentTypeEnum.MatInputText]: { type: 'custom-mat-input-text', className: 'CustomMatInputTextComponent' },
             [ComponentTypeEnum.MatInputSelect]: { type: 'custom-mat-input-select', className: 'CustomMatInputSelectComponent' },
-            [ComponentTypeEnum.MatInputMulticheck]: { type: 'custom-mat-input-select', className: 'CustomMatInputSelectComponent' }
+            [ComponentTypeEnum.MatInputMulticheck]: { type: 'custom-mat-input-select', className: 'CustomMatInputSelectComponent' },
+            [ComponentTypeEnum.MatInputRadio]: { type: 'custom-mat-input-radio', className: 'CustomMatInputRadioComponent' }
 
         };
 

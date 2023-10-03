@@ -8,5 +8,5 @@ export interface FormControlComponent {
 
 export interface FormControlSelectComponent extends FormControlComponent {
     options: any[];
-    isMultiple: boolean;
+    isMultiple?: boolean;
 }

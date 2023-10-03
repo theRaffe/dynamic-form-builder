@@ -124,6 +124,25 @@ export class AppComponent implements OnInit {
                     required: true,
                 },
             },
+            {
+                name: 'experience',
+                title: 'Nivel de experiencia',
+                type: 'mat-input-radio',
+                validations: {
+                    required: true,
+                },
+                options: [
+                    {
+                        description: 'Junior'
+                    },
+                    {
+                        description: 'Senior'
+                    },
+                    {
+                        description: 'Architech'
+                    },
+                ]
+            }
         ]
     }
 

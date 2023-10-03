@@ -1,0 +1,14 @@
+<label id="example-radio-group-label">{{ placeholder }}</label>
+<mat-radio-group
+    aria-labelledby="custom-radio-group-label"
+    class="custom-radio-group"
+    [formControl]="formControlInput"
+    >
+    <mat-radio-button
+        class="custom-radio-button"
+        *ngFor="let option of options"
+        [value]="option"
+    >
+        {{ option.description }}
+    </mat-radio-button>
+</mat-radio-group>

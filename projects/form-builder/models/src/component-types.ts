@@ -8,4 +8,5 @@ export enum ComponentTypeEnum {
     MatInputText = 'mat-input-text',
     MatInputSelect = 'mat-input-select',
     MatInputMulticheck = 'mat-input-multicheck',
+    MatInputRadio = 'mat-input-radio',
 };

@@ -1,4 +1,3 @@
-import { ComponentTypeEnum } from "./component-types";
 
 export type typeInput =
     | 'text'
@@ -8,7 +7,8 @@ export type typeInput =
     | 'container'
     | 'mat-input-text'
     | 'mat-input-select'
-    | 'mat-input-multicheck';
+    | 'mat-input-multicheck'
+    | 'mat-input-radio';
 export interface validationRequired {
     required: boolean;
 }

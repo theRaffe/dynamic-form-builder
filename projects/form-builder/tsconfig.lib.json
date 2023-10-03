@@ -14,7 +14,8 @@
   "include": [
     "shared/src/components/input-text/input-text.component.ts",
     "shared/src/components/custom-mat-input-text/custom-mat-input-text.component.ts",
-    "shared/src/components/custom-mat-input-text/custom-mat-input-select.component.ts"
+    "shared/src/components/custom-mat-input-text/custom-mat-input-select.component.ts",
+    "shared/src/components/custom-mat-input-text/custom-mat-input-radio.component.ts",
 
   ]
 }

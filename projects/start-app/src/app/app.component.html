@@ -1,10 +1,13 @@
 <main class="main-app">
     <section>
-        <form-container class="form1" [inputs]="initialInputs">
+        <form-container class="form1" [inputs]="initialInputs" (formGroupOutput)="onFormGroupOutput1($event)">
         </form-container>
+        <button mat-raised-button color="primary" [disabled]="formGroup1?.invalid">Submit</button>
+
     </section>
     <section>
-        <form-container class="form1" [inputs]="singleFormInputs">
+        <form-container class="form1" [inputs]="singleFormInputs" (formGroupOutput)="onFormGroupOutput2($event)">
         </form-container>
+        <button mat-raised-button color="primary" [disabled]="formGroup2?.invalid">Submit</button>
     </section>
 </main>

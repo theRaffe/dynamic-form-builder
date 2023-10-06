@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { InputStructure } from '@form-builder/models';
+import { FormGroup } from '@angular/forms';
+import { FormGroupOutput, InputStructure } from '@form-builder/models';
 
 @Component({
     selector: 'app-root',
@@ -9,7 +10,8 @@ import { InputStructure } from '@form-builder/models';
 export class AppComponent implements OnInit {
     public initialInputs!: InputStructure[];
     public singleFormInputs!: InputStructure[];
-
+    public formGroup1: FormGroup | undefined;
+    public formGroup2: FormGroup | undefined;
     
     ngOnInit(): void {
         this.initialInputs = [
@@ -153,4 +155,12 @@ export class AppComponent implements OnInit {
         type: 'text',
     };
 
+    public onFormGroupOutput1($event: FormGroupOutput) {
+        this.formGroup1 = $event.formGroup;
+        // this.formGroup1.invalid
+    }
+
+    public onFormGroupOutput2($event: FormGroupOutput) {
+        this.formGroup2 = $event.formGroup;
+    }
 }

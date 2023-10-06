@@ -3,4 +3,5 @@
     <mat-select [formControl]="formControlInput" [multiple]="isMultiple">
         <mat-option *ngFor="let option of options" value="option">{{option.description}}</mat-option>
     </mat-select>
+    <mat-error *ngIf="formControlInput.invalid">{{getErrorMessage()}}</mat-error>
 </mat-form-field>

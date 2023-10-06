@@ -4,7 +4,7 @@ import { FormControlComponent, FormControlSelectComponent } from '@form-builder/
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
-import { NgFor } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 
 @Component({
     selector: 'custom-mat-input-text',
@@ -18,6 +18,7 @@ import { NgFor } from '@angular/common';
         MatInputModule,
         MatSelectModule,
         NgFor,
+        NgIf,
     ],
 })
 export class CustomMatInputSelectComponent implements FormControlSelectComponent {
@@ -33,4 +34,11 @@ export class CustomMatInputSelectComponent implements FormControlSelectComponent
 
     @Input()
     isMultiple!: boolean;
+
+    getErrorMessage() {
+        if (this.formControlInput.hasError('required')) {
+            return 'You must enter a value';
+        }
+        return '';
+    }
 }

@@ -1,3 +1,4 @@
+import { NgFor, NgIf } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import {
     FormControl,
@@ -5,12 +6,12 @@ import {
     FormsModule,
     ReactiveFormsModule,
 } from '@angular/forms';
-import { FormControlComponent } from '@form-builder/models';
-import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { NgFor, NgIf } from '@angular/common';
-import { getErrorMessage } from '../../utilities/index';
+import { MatInputModule } from '@angular/material/input';
+import { FormControlComponent, ValidationInput } from '@form-builder/models';
+import { getErrorMessageInput$ } from '../../utilities/index';
 import { tap } from 'rxjs';
+
 @Component({
     selector: 'custom-mat-input-text',
     templateUrl: './custom-mat-input-text.component.html',
@@ -28,7 +29,6 @@ import { tap } from 'rxjs';
 export class CustomMatInputTextComponent
     implements FormControlComponent, OnInit
 {
-    
     formGroup?: FormGroup<any> | undefined;
     @Input()
     public formControlInput!: FormControl;
@@ -37,34 +37,13 @@ export class CustomMatInputTextComponent
     placeholder = '';
 
     @Input()
-    validations: any;
+    validations: ValidationInput | undefined;
 
-    public errorMessages:string [] = [];
-
-    getErrorMessage() {
-        const messages = getErrorMessage(
-            this.formControlInput,
-            this.validations
-        );
-        if (messages.length) {
-            return messages.join('\\n');
-        }
-
-        return '';
-    }
+    public errorMessages: string[] = [];
 
     public ngOnInit(): void {
-        this.formControlInput.statusChanges.pipe(
-            tap(status => {
-                this.errorMessages = [];
-                if (status === 'INVALID') {
-                    const messages = getErrorMessage(
-                        this.formControlInput,
-                        this.validations
-                    );
-                    this.errorMessages = messages;
-                }
-            })
-        ).subscribe();
+        getErrorMessageInput$(this.formControlInput, this.validations)
+            .pipe(tap((errors) => (this.errorMessages = errors)))
+            .subscribe();
     }
 }

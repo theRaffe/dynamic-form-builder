@@ -1,10 +1,11 @@
 import { AbstractControl, FormGroup } from "@angular/forms";
+import { ValidationInput } from "./input-structure.model";
 
 export interface FormControlComponent {
     formGroup?: FormGroup;
     formControlInput: AbstractControl | null;
     placeholder: string;
-    validations?: any;
+    validations?: ValidationInput;
 }
 
 export interface FormControlSelectComponent extends FormControlComponent {

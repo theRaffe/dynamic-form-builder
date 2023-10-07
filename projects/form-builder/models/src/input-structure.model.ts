@@ -12,9 +12,19 @@ export type typeInput =
 export interface validationRequired {
     required: boolean;
 }
+
 export interface validationRange {
     min: number;
     max: number;
+}
+
+
+export interface ValidationInput {
+    required?: boolean;
+    range?: validationRange;
+    email?: boolean;
+    minLength?: number;
+    maxLength?: number;
 }
 
 export interface InputStructure {
@@ -24,11 +34,5 @@ export interface InputStructure {
     disabled?: boolean;
     children?: InputStructure[];
     options?: any[];
-    validations?: {
-        required?: boolean;
-        range?: validationRange;
-        email?: boolean;
-        minLength?: number;
-        maxLength?: number;
-    };
+    validations?: ValidationInput;
 }

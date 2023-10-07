@@ -11,4 +11,7 @@
     >
         {{ option.description }}
     </mat-radio-button>
+    <mat-error *ngFor="let error of errorMessages">
+        {{ error }}
+    </mat-error>
 </mat-radio-group>

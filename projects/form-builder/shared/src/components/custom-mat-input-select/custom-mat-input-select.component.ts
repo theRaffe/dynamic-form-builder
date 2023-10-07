@@ -1,10 +1,12 @@
+import { NgFor, NgIf } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { FormControlComponent, FormControlSelectComponent } from '@form-builder/models';
-import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
-import { NgFor, NgIf } from '@angular/common';
+import { FormControlSelectComponent, ValidationInput } from '@form-builder/models';
+import { tap } from 'rxjs';
+import { getErrorMessageInput$ } from '../../utilities';
 
 @Component({
     selector: 'custom-mat-input-text',
@@ -35,10 +37,14 @@ export class CustomMatInputSelectComponent implements FormControlSelectComponent
     @Input()
     isMultiple!: boolean;
 
-    getErrorMessage() {
-        if (this.formControlInput.hasError('required')) {
-            return 'You must enter a value';
-        }
-        return '';
+    @Input()
+    validations: ValidationInput | undefined;
+
+    public errorMessages: string[] = [];
+
+    public ngOnInit(): void {
+        getErrorMessageInput$(this.formControlInput, this.validations)
+            .pipe(tap((errors) => (this.errorMessages = errors)))
+            .subscribe();
     }
 }

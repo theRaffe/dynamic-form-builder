@@ -1,10 +1,12 @@
 import { NgFor } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
-import { FormControlSelectComponent } from '@form-builder/models';
+import { FormControlSelectComponent, ValidationInput } from '@form-builder/models';
+import { tap } from 'rxjs';
+import { getErrorMessageInput$ } from '../../utilities';
 
 @Component({
     selector: 'custom-mat-input-text',
@@ -20,7 +22,7 @@ import { FormControlSelectComponent } from '@form-builder/models';
         NgFor,
     ],
 })
-export class CustomMatInputRadioComponent implements FormControlSelectComponent {
+export class CustomMatInputRadioComponent implements FormControlSelectComponent, OnInit {
     formGroup?: FormGroup<any> | undefined;
     @Input()
     public formControlInput!: FormControl;
@@ -33,4 +35,15 @@ export class CustomMatInputRadioComponent implements FormControlSelectComponent 
 
     @Input()
     isMultiple!: boolean;
+
+    @Input()
+    validations: ValidationInput | undefined;
+
+    public errorMessages: string[] = [];
+
+    public ngOnInit(): void {
+        getErrorMessageInput$(this.formControlInput, this.validations)
+            .pipe(tap((errors) => (this.errorMessages = errors)))
+            .subscribe();
+    }
 }

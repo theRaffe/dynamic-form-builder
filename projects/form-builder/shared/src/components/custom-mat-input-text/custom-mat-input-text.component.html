@@ -5,8 +5,7 @@
         [formControl]="formControlInput"
         placeholder="{{ placeholder }}"
     />
-    <!-- <mat-error *ngIf="formControlInput.invalid">{{getErrorMessage()}}</mat-error> -->
     <mat-error *ngFor="let error of errorMessages">
-        {{ error }}<br />
+        {{ error }}
     </mat-error>
 </mat-form-field>

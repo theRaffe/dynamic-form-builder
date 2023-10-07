@@ -9,7 +9,7 @@ import { FormControlSelectComponent } from '@form-builder/models';
 @Component({
     selector: 'custom-mat-input-text',
     templateUrl: './custom-mat-input-radio.component.html',
-    styleUrls: ['./custom-mat-input-radio.component.css'],
+    styleUrls: ['./custom-mat-input-radio.component.scss'],
     standalone: true,
     imports: [
         FormsModule,

@@ -27,5 +27,8 @@ export interface InputStructure {
     validations?: {
         required?: boolean;
         range?: validationRange;
+        email?: boolean;
+        minLength?: number;
+        maxLength?: number;
     };
 }

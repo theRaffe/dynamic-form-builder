@@ -57,6 +57,8 @@ export class AppComponent implements OnInit {
                         type: 'mat-input-text',
                         validations: {
                             required: true,
+                            email: true,
+                            minLength: 8
                         },
                     },
                     {

@@ -1,0 +1,18 @@
+:host {
+    mat-form-field {
+        width: 100%;
+    }
+
+    /* Additional placeholder for invalid mat-form-fields */
+    /* src: https://github.com/angular/material2/issues/4580 */
+    mat-form-field.ng-invalid.ng-touched {
+    animation: mat-error-animation;
+    animation-duration: 0.3s;
+    margin-bottom: 18px;
+    }
+
+    @keyframes mat-error-animation {
+    from {margin-bottom: 0;}
+    to {margin-bottom: 18px;}
+    }
+}

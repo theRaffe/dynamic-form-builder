@@ -40,6 +40,22 @@ export class FormBuilderService {
                             Validators.max(inputValidators.range?.max)
                         );
                     }
+
+                    if (inputValidators.email) {
+                        validators.push(Validators.email)
+                    }
+
+                    if(inputValidators.minLength !== undefined) {
+                        validators.push(
+                            Validators.minLength(inputValidators.minLength)
+                        );
+                    }
+
+                    if(inputValidators.maxLength !== undefined) {
+                        validators.push(
+                            Validators.maxLength(inputValidators.maxLength)
+                        );
+                    }
                 }
                 result[input.name] = [
                     { value: '', disabled: input.disabled },

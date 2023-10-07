@@ -65,6 +65,7 @@ export class InputControlBuilderService {
                         controlInputSelect.isMultiple = true;
                     }
                 }
+                formControlComponent.validations = input.validations;
                 this.componentRefs.push(newComponentRef);
                 this.componentRefsDict[input.name] = newComponentRef;
             } else {

@@ -9,7 +9,7 @@ import { NgFor, NgIf } from '@angular/common';
 @Component({
     selector: 'custom-mat-input-text',
     templateUrl: './custom-mat-input-select.component.html',
-    styleUrls: ['./custom-mat-input-select.component.css'],
+    styleUrls: ['./custom-mat-input-select.component.scss'],
     standalone: true,
     imports: [
         FormsModule,

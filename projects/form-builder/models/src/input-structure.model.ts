@@ -1,4 +1,6 @@
-
+/**
+ * Valid type of input controls
+ */
 export type typeInput =
     | 'text'
     | 'date'
@@ -27,6 +29,9 @@ export interface ValidationInput {
     maxLength?: number;
 }
 
+/**
+ * Model of input control
+ */
 export interface InputStructure {
     name: string;
     type: typeInput;

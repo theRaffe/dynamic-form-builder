@@ -5,8 +5,7 @@ import {
     ComponentTypeEnum,
     FormControlComponent,
     FormControlSelectComponent,
-    InputStructure,
-    typeInput,
+    InputStructure
 } from '@form-builder/models';
 import { ConfigComponentService } from '../config/config-components.service';
 
@@ -98,6 +97,12 @@ export class InputControlBuilderService {
         return inputs.filter((input) => input.type === 'container');
     }
 
+    /**
+     * Get all different types of the input list
+     * 
+     * @param inputs list of inputs
+     * @returns 
+     */
     private getInputTypes(inputs: InputStructure[]): any[] {
         const result = [];
         for (const input of inputs) {

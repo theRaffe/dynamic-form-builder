@@ -28,16 +28,25 @@ export class CustomMatInputRadioComponent implements FormControlSelectComponent,
     public formControlInput!: FormControl;
 
     @Input()
-    placeholder = '';
+    public placeholder = '';
 
     @Input()
-    options!: any[];
+    public options!: any[];
 
     @Input()
-    isMultiple!: boolean;
+    public isMultiple!: boolean;
 
+    /**
+     * object that contains validations(optional)
+     * * required
+     * * max, set maximun value for numeric type
+     * * min, set minimum value for numeric type
+     * * minlength, set minimum number of characters for string inputs
+     * * maxlength, set maximum number of characters for string inputs
+     * * email, validate input string with email format
+     */
     @Input()
-    validations: ValidationInput | undefined;
+    public validations: ValidationInput | undefined;
 
     public errorMessages: string[] = [];
 

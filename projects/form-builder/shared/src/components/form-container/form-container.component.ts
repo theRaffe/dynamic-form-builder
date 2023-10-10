@@ -65,17 +65,25 @@ export class FormContainerComponent
         this.inputControlBuilderService.releaseComponents();
     }
 
+    /**
+     * Hook cycle to detect changes over inputs
+     *
+     * @param changes dictionary that contains changes of 'inputs'
+     */
     ngOnChanges(changes: SimpleChanges): void {
         if (!!changes['inputs'].currentValue) {
             this.initalizeForm(this.inputs);
         }
     }
 
+    /**
+     * hook that is called after Angular has fully initialized,
+     * to read all 'dynamic' elements and create input components inside
+     */
     public ngAfterViewInit(): void {
         this.dynamicContainers?.changes
             .pipe(
                 tap((containers: QueryList<ViewContainerRef>) => {
-                    console.log({ containers });
                     this.renderFormControlComponents(containers);
                 })
             )

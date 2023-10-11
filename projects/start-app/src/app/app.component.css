@@ -3,10 +3,18 @@
     align-items: center;
     justify-content: center;
     flex-flow: column;
+    row-gap: .5rem;
+
 }
 
 .form1 {
     display: block;
     width: 500px;
     height: 300px;
+}
+
+.main-app section {
+    display: flex;
+    flex-flow: column;
+    row-gap: .5rem;
 }

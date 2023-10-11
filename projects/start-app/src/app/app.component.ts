@@ -23,7 +23,7 @@ export class AppComponent implements OnInit {
                     {
                         name: 'fullName',
                         title: 'Full Name',
-                        type: 'text',
+                        type: 'mat-input-text',
                         validations: {
                             required: true,
                         },
@@ -31,9 +31,11 @@ export class AppComponent implements OnInit {
                     {
                         name: 'nickname',
                         title: 'Nickname',
-                        type: 'text',
+                        type: 'mat-input-text',
                         validations: {
                             required: true,
+                            email: true,
+                            minLength: 8
                         },
                     },
                 ]
@@ -43,24 +45,24 @@ export class AppComponent implements OnInit {
                 title: 'Step 2',
                 type: 'container',
                 children: [
-                    {
-                        name: 'fullName2',
-                        title: 'Full Name2',
-                        type: 'mat-input-text',
-                        validations: {
-                            required: true,
-                        },
-                    },
-                    {
-                        name: 'nickname2',
-                        title: 'Nickname2',
-                        type: 'mat-input-text',
-                        validations: {
-                            required: true,
-                            email: true,
-                            minLength: 8
-                        },
-                    },
+                    // {
+                    //     name: 'fullName2',
+                    //     title: 'Full Name2',
+                    //     type: 'mat-input-text',
+                    //     validations: {
+                    //         required: true,
+                    //     },
+                    // },
+                    // {
+                    //     name: 'nickname2',
+                    //     title: 'Nickname2',
+                    //     type: 'mat-input-text',
+                    //     validations: {
+                    //         required: true,
+                    //         email: true,
+                    //         minLength: 8
+                    //     },
+                    // },
                     {
                         name: 'department',
                         title: 'Area de Interes',

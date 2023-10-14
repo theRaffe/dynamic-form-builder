@@ -12,7 +12,7 @@ import {
     ViewContainerRef,
 } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { FormGroupOutput, InputStructure } from '@form-builder/models';
+import { FormGroupOutput, FormInputConfig, InputStructure } from '@form-builder/models';
 import {
     FormBuilderService,
     InputControlBuilderService,
@@ -46,7 +46,7 @@ export class FormContainerComponent
     dynamicContainers: QueryList<ViewContainerRef> | undefined;
 
     @Input()
-    public inputs: InputStructure[] = [];
+    public formInputConfig!: FormInputConfig;
 
     /**
      * this event notifies when formGroup and components are ready
@@ -71,8 +71,8 @@ export class FormContainerComponent
      * @param changes dictionary that contains changes of 'inputs'
      */
     ngOnChanges(changes: SimpleChanges): void {
-        if (!!changes['inputs'].currentValue) {
-            this.initalizeForm(this.inputs);
+        if (!!changes['formInputConfig'].currentValue) {
+            this.initalizeForm(this.formInputConfig.inputStructure);
         }
     }
 
@@ -110,6 +110,7 @@ export class FormContainerComponent
         this.formGroupOutput.emit({
             componentRefDict: this.inputControlBuilderService.formControlsDict,
             formGroup: this._formGroup,
+            getOutputFromForm: this.getOutputFromForm
         });
     }
 
@@ -137,5 +138,9 @@ export class FormContainerComponent
         
         this.allTabs = allTabs;
         this.allInputFormControl = this.allTabs.flatMap((tab) => tab.inputs);
+    }
+
+    private getOutputFromForm = () => {
+        return this.formBuilderService.getOutputFromForm(this._formGroup, this.formInputConfig.outputConfig);
     }
 }

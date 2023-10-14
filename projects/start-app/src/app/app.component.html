@@ -1,15 +1,15 @@
 <main class="main-app">
     <section class="mat-typography">
         <h1 class="mat-display-1">Example with tabs</h1>
-        <form-container class="form1" [inputs]="initialInputs" (formGroupOutput)="onFormGroupOutput1($event)">
+        <form-container class="form1" [formInputConfig]="formInputConfig1" (formGroupOutput)="onFormGroupOutput1($event)">
         </form-container>
-        <button mat-raised-button color="primary" [disabled]="formGroup1?.invalid">Submit</button>
+        <button mat-raised-button color="primary" [disabled]="formGroup1?.invalid" (click)="submitForm1()">Submit</button>
 
     </section>
     <section class="mat-typography">
         <h1 class="mat-display-1">Example without tabs</h1>
 
-        <form-container class="form1" [inputs]="singleFormInputs" (formGroupOutput)="onFormGroupOutput2($event)">
+        <form-container class="form1" [formInputConfig]="formInputConfig1" (formGroupOutput)="onFormGroupOutput2($event)">
         </form-container>
         <button mat-raised-button color="primary" [disabled]="formGroup2?.invalid">Submit</button>
     </section>

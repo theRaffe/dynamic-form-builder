@@ -66,4 +66,38 @@ export class FormBuilderService {
 
         return result;
     }
+
+    /**
+     * Get data from formGroup and returning and object according to outputConfig
+     *
+     * @param formGroup source of the data
+     * @param outputConfig output format of the result object
+     */
+    public getOutputFromForm(formGroup:FormGroup, outputConfig: any) {
+        const source = formGroup.getRawValue();
+        const tempResult = structuredClone(outputConfig);
+        this.fillObjectOutputInner(tempResult, source);
+
+        return tempResult;
+    }
+
+    /**
+     * Iterate through outputConfig to fill with source data
+     *
+     * @param tempResult temporal object to fill with result data
+     * @param valuesDict source of data(formGroup data)
+     */
+    private fillObjectOutputInner(tempResult:any, valuesDict:any) {
+        const keyValueCode = '<value>';
+        const allKeys = Object.getOwnPropertyNames(tempResult);
+        
+        for(const keyName of allKeys) {
+        const hasProperties =Object.getOwnPropertyNames(tempResult[keyName]).length > 0;
+        if (tempResult[keyName] === keyValueCode) {
+            tempResult[keyName] = valuesDict[keyName];
+        } else if (typeof tempResult[keyName] === 'object' && hasProperties) {
+            this.fillObjectOutputInner(tempResult[keyName], valuesDict);
+        }
+        }
+    }
 }

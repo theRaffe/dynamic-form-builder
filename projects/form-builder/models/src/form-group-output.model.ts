@@ -12,4 +12,5 @@ export type ComponentRefDictType = { [index: string]: ComponentRef<any> };
 export interface FormGroupOutput {
     formGroup: FormGroup;
     componentRefDict: ComponentRefDictType;
+    getOutputFromForm: () => any;
 }

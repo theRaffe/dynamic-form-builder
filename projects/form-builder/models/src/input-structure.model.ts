@@ -41,3 +41,14 @@ export interface InputStructure {
     options?: any[];
     validations?: ValidationInput;
 }
+
+/**
+ * Configuration of input controls and output result
+ *
+ * @inputStructure definition of each input control
+ * @outputConfig definition of output object(JSON) 
+ */
+export interface FormInputConfig {
+    inputStructure: InputStructure[];
+    outputConfig: any
+}

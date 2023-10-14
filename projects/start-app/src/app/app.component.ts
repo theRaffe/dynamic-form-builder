@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { FormGroupOutput, InputStructure } from '@form-builder/models';
+import {
+    FormGroupOutput,
+    FormInputConfig,
+    InputStructure,
+} from '@form-builder/models';
 
 @Component({
     selector: 'app-root',
@@ -12,7 +16,12 @@ export class AppComponent implements OnInit {
     public singleFormInputs!: InputStructure[];
     public formGroup1: FormGroup | undefined;
     public formGroup2: FormGroup | undefined;
-    
+    public formInputConfig1!: FormInputConfig;
+    public formInputConfig2!: FormInputConfig;
+    private getOutputFromForm1!: () => any;
+
+    constructor() {}
+
     ngOnInit(): void {
         this.initialInputs = [
             {
@@ -35,34 +44,16 @@ export class AppComponent implements OnInit {
                         validations: {
                             required: true,
                             email: true,
-                            minLength: 8
+                            minLength: 8,
                         },
                     },
-                ]
+                ],
             },
             {
                 name: 'step2',
                 title: 'Step 2',
                 type: 'container',
                 children: [
-                    // {
-                    //     name: 'fullName2',
-                    //     title: 'Full Name2',
-                    //     type: 'mat-input-text',
-                    //     validations: {
-                    //         required: true,
-                    //     },
-                    // },
-                    // {
-                    //     name: 'nickname2',
-                    //     title: 'Nickname2',
-                    //     type: 'mat-input-text',
-                    //     validations: {
-                    //         required: true,
-                    //         email: true,
-                    //         minLength: 8
-                    //     },
-                    // },
                     {
                         name: 'department',
                         title: 'Area de Interes',
@@ -72,15 +63,15 @@ export class AppComponent implements OnInit {
                         },
                         options: [
                             {
-                                description: "Frontend"
+                                description: 'Frontend',
                             },
                             {
-                                description: "Backend"
+                                description: 'Backend',
                             },
                             {
-                                description: "Otro"
-                            }
-                        ]
+                                description: 'Otro',
+                            },
+                        ],
                     },
                     {
                         name: 'language',
@@ -92,25 +83,24 @@ export class AppComponent implements OnInit {
                         options: [
                             {
                                 description: 'Javascript',
-                                code: 'Javascript'
+                                code: 'Javascript',
                             },
                             {
                                 description: 'Python',
-                                code: 'Python'
+                                code: 'Python',
                             },
                             {
                                 description: 'Rust',
-                                code: 'Rust'
+                                code: 'Rust',
                             },
                             {
                                 description: 'Java',
-                                code: 'Java'
+                                code: 'Java',
                             },
-                        ]
+                        ],
                     },
-                ]
-            }
-            
+                ],
+            },
         ];
 
         this.singleFormInputs = [
@@ -139,17 +129,38 @@ export class AppComponent implements OnInit {
                 },
                 options: [
                     {
-                        description: 'Junior'
+                        description: 'Junior',
                     },
                     {
-                        description: 'Senior'
+                        description: 'Senior',
                     },
                     {
-                        description: 'Architech'
+                        description: 'Architech',
                     },
-                ]
-            }
-        ]
+                ],
+            },
+        ];
+
+        const outputConf1: any = {
+            generalInfo: {
+                nickname: '<value>',
+                fullName: '<value>',
+            },
+            details: {
+                department: '<value>',
+                language: '<value>',
+            },
+        };
+
+        this.formInputConfig1 = {
+            inputStructure: this.initialInputs,
+            outputConfig: outputConf1,
+        };
+
+        this.formInputConfig2 = {
+            inputStructure: this.singleFormInputs,
+            outputConfig: {},
+        };
     }
 
     title = 'start-app';
@@ -161,10 +172,15 @@ export class AppComponent implements OnInit {
 
     public onFormGroupOutput1($event: FormGroupOutput) {
         this.formGroup1 = $event.formGroup;
-        // this.formGroup1.invalid
+        this.getOutputFromForm1 = $event.getOutputFromForm;
     }
 
     public onFormGroupOutput2($event: FormGroupOutput) {
         this.formGroup2 = $event.formGroup;
+    }
+
+    public submitForm1() {
+        const outputResult = this.getOutputFromForm1();
+        console.log({ outputResult });
     }
 }

@@ -5,6 +5,8 @@ import {
     FormInputConfig,
     InputStructure,
 } from '@form-builder/models';
+import { LoadConfigInputAdapter } from '../adapters/load-config-input.adapter.service';
+import { tap } from 'rxjs';
 
 @Component({
     selector: 'app-root',
@@ -20,7 +22,9 @@ export class AppComponent implements OnInit {
     public formInputConfig2!: FormInputConfig;
     private getOutputFromForm1!: () => any;
 
-    constructor() {}
+    constructor(
+        private readonly loadConfigInputAdapter: LoadConfigInputAdapter,
+    ) {}
 
     ngOnInit(): void {
         this.initialInputs = [
@@ -141,21 +145,9 @@ export class AppComponent implements OnInit {
             },
         ];
 
-        const outputConf1: any = {
-            generalInfo: {
-                nickname: '<value>',
-                fullName: '<value>',
-            },
-            details: {
-                department: '<value>',
-                language: '<value>',
-            },
-        };
-
-        this.formInputConfig1 = {
-            inputStructure: this.initialInputs,
-            outputConfig: outputConf1,
-        };
+        this.loadConfigInputAdapter.getInputsConfiguration().pipe(
+            tap(formInputConfig => this.formInputConfig1 = formInputConfig )
+        ).subscribe();
 
         this.formInputConfig2 = {
             inputStructure: this.singleFormInputs,

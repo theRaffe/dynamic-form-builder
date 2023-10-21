@@ -1,0 +1,5 @@
+{
+    "/api/*": "/$1",
+    "/input-config": "/basic-config",
+    "/create-user": "/basic-new-user"
+}

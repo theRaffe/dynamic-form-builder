@@ -1,0 +1,116 @@
+{
+    "basic-config": {
+        "inputStructure": [
+            {
+                "name": "step1",
+                "title": "Step 1",
+                "type": "container",
+                "children": [
+                    {
+                        "name": "fullName",
+                        "title": "Full Name",
+                        "type": "mat-input-text",
+                        "validations": {
+                            "required": true
+                        }
+                    },
+                    {
+                        "name": "nickname",
+                        "title": "Nickname",
+                        "type": "mat-input-text",
+                        "validations": {
+                            "required": true,
+                            "email": true,
+                            "minLength": 8
+                        }
+                    }
+                ]
+            },
+            {
+                "name": "step2",
+                "title": "Step 2",
+                "type": "container",
+                "children": [
+                    {
+                        "name": "department",
+                        "title": "Area de Interes",
+                        "type": "mat-input-select",
+                        "validations": {
+                            "required": true
+                        },
+                        "options": [
+                            {
+                                "description": "Frontend"
+                            },
+                            {
+                                "description": "Backend"
+                            },
+                            {
+                                "description": "Otro"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "language",
+                        "title": "Programing Languages",
+                        "type": "mat-input-multicheck",
+                        "validations": {
+                            "required": true
+                        },
+                        "options": [
+                            {
+                                "description": "Javascript",
+                                "code": "Javascript"
+                            },
+                            {
+                                "description": "Python",
+                                "code": "Python"
+                            },
+                            {
+                                "description": "Rust",
+                                "code": "Rust"
+                            },
+                            {
+                                "description": "Java",
+                                "code": "Java"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "experience",
+                        "title": "Nivel de experiencia",
+                        "type": "mat-input-radio",
+                        "validations": {
+                            "required": true
+                        },
+                        "options": [
+                            {
+                                "description": "Junior"
+                            },
+                            {
+                                "description": "Senior"
+                            },
+                            {
+                                "description": "Architech"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "outputConfig": {
+            "generalInfo": {
+                "nickname": "<value>",
+                "fullName": "<value>"
+            },
+            "details": {
+                "department": "<value>",
+                "language": "<value>"
+            }
+        }
+    },
+    "basic-new-user": {
+        "nickname": "raffe@devmail.com",
+        "fullName": "raffe dev"
+    }
+}

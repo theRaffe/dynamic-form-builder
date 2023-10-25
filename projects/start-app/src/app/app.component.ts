@@ -7,6 +7,7 @@ import {
 } from '@form-builder/models';
 import { LoadConfigInputAdapter } from '../adapters/load-config-input.adapter.service';
 import { tap } from 'rxjs';
+import { UserAdapterService } from '../adapters/user.adapter.service';
 
 @Component({
     selector: 'app-root',
@@ -24,6 +25,7 @@ export class AppComponent implements OnInit {
 
     constructor(
         private readonly loadConfigInputAdapter: LoadConfigInputAdapter,
+        private readonly userAdapterService: UserAdapterService,
     ) {}
 
     ngOnInit(): void {
@@ -174,5 +176,8 @@ export class AppComponent implements OnInit {
     public submitForm1() {
         const outputResult = this.getOutputFromForm1();
         console.log({ outputResult });
+        this.userAdapterService.createNewUser(outputResult).pipe(
+            tap(result => console.log({ respondeBody: result }))
+        ).subscribe();
     }
 }

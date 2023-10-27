@@ -1,0 +1,23 @@
+:host {
+    .main-spinner {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        background-color: rgba(77, 79, 81, 0.567);
+        z-index: 10;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .main-spinner__animation-container {
+        background-color: aliceblue;
+        width: 40%;
+        height: 466px;
+        display: flex;
+        flex-flow: column;
+        border-radius: 10px;
+    }
+}

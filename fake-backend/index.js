@@ -43,6 +43,10 @@ server.post("/v1/user", (req, res, next) => {
     }, 3000);
 });
 
+server.use(function(req, res, next){
+  setTimeout(next, 2000);
+});
+
 server.use(router);
 
 server.listen(3000, () => {

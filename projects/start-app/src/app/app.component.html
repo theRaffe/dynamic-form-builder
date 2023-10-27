@@ -1,4 +1,4 @@
-<main class="main-app">
+    <main class="main-app" ngClass="{ removeScroll: isLoadingSpinner }">
     <section class="mat-typography">
         <h1 class="mat-display-1">Example with tabs</h1>
         <form-container class="form1" [formInputConfig]="formInputConfig1" (formGroupOutput)="onFormGroupOutput1($event)">
@@ -14,3 +14,4 @@
         <button mat-raised-button color="primary" [disabled]="!!formGroup2 && formGroup2.invalid">Submit</button>
     </section>
 </main>
+<main-spinner *ngIf="isLoadingSpinner"></main-spinner>

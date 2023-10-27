@@ -4,7 +4,11 @@
     justify-content: center;
     flex-flow: column;
     row-gap: .5rem;
-
+    height: 100vh;
+    widows: 100vw;
+}
+.main-app .removeScroll {
+    overflow: hidden;
 }
 
 .form1 {

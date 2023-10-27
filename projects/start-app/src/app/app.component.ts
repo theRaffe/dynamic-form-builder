@@ -8,11 +8,25 @@ import {
 import { LoadConfigInputAdapter } from '../adapters/load-config-input.adapter.service';
 import { tap } from 'rxjs';
 import { UserAdapterService } from '../adapters/user.adapter.service';
+import { HttpClientModule } from '@angular/common/http';
+import { MatButtonModule } from '@angular/material/button';
+import { FormContainerModule } from '@form-builder/shared';
+import { MainSpinnerComponent } from '../components/main-spinner/main-spinner.component';
+import { CommonModule } from '@angular/common';
+import { LoadingService } from '../services/loading.service';
 
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.css'],
+    standalone: true,
+    imports: [
+        CommonModule,
+        FormContainerModule,
+        MatButtonModule,
+        HttpClientModule,
+        MainSpinnerComponent
+    ]
 })
 export class AppComponent implements OnInit {
     public initialInputs!: InputStructure[];
@@ -22,10 +36,12 @@ export class AppComponent implements OnInit {
     public formInputConfig1!: FormInputConfig;
     public formInputConfig2!: FormInputConfig;
     private getOutputFromForm1!: () => any;
+    public isLoadingSpinner = false;
 
     constructor(
         private readonly loadConfigInputAdapter: LoadConfigInputAdapter,
         private readonly userAdapterService: UserAdapterService,
+        private readonly loadingService: LoadingService, 
     ) {}
 
     ngOnInit(): void {
@@ -147,7 +163,12 @@ export class AppComponent implements OnInit {
             },
         ];
 
+        this.loadingService.loadingSub.pipe().subscribe((loading) => {
+            this.isLoadingSpinner = loading;
+        });
+
         this.loadConfigInputAdapter.getInputsConfiguration().pipe(
+            this.loadingService.withLoader(),
             tap(formInputConfig => this.formInputConfig1 = formInputConfig )
         ).subscribe();
 
@@ -177,6 +198,7 @@ export class AppComponent implements OnInit {
         const outputResult = this.getOutputFromForm1();
         console.log({ outputResult });
         this.userAdapterService.createNewUser(outputResult).pipe(
+            this.loadingService.withLoader(),
             tap(result => console.log({ respondeBody: result }))
         ).subscribe();
     }

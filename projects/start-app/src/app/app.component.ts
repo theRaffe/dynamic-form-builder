@@ -6,7 +6,7 @@ import {
     InputStructure,
 } from '@form-builder/models';
 import { LoadConfigInputAdapter } from '../adapters/load-config-input.adapter.service';
-import { tap } from 'rxjs';
+import { catchError, tap, throwError } from 'rxjs';
 import { UserAdapterService } from '../adapters/user.adapter.service';
 import { HttpClientModule } from '@angular/common/http';
 import { MatButtonModule } from '@angular/material/button';
@@ -14,6 +14,7 @@ import { FormContainerModule } from '@form-builder/shared';
 import { MainSpinnerComponent } from '../components/main-spinner/main-spinner.component';
 import { CommonModule } from '@angular/common';
 import { LoadingService } from '../services/loading.service';
+import { AngularToastifyModule, ToastService } from 'angular-toastify';
 
 @Component({
     selector: 'app-root',
@@ -25,8 +26,10 @@ import { LoadingService } from '../services/loading.service';
         FormContainerModule,
         MatButtonModule,
         HttpClientModule,
-        MainSpinnerComponent
-    ]
+        MainSpinnerComponent,
+        AngularToastifyModule,
+    ],
+    providers: [ToastService],
 })
 export class AppComponent implements OnInit {
     public initialInputs!: InputStructure[];
@@ -42,6 +45,7 @@ export class AppComponent implements OnInit {
         private readonly loadConfigInputAdapter: LoadConfigInputAdapter,
         private readonly userAdapterService: UserAdapterService,
         private readonly loadingService: LoadingService, 
+        private readonly _toastService: ToastService
     ) {}
 
     ngOnInit(): void {
@@ -199,7 +203,11 @@ export class AppComponent implements OnInit {
         console.log({ outputResult });
         this.userAdapterService.createNewUser(outputResult).pipe(
             this.loadingService.withLoader(),
-            tap(result => console.log({ respondeBody: result }))
+            tap(result => this._toastService.success('User created succefully!')),
+            catchError(err => {
+                this._toastService.error('An error occurred at creating user.');
+                return throwError(() => err);
+            })
         ).subscribe();
     }
 }

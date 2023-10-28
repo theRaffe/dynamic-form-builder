@@ -37,3 +37,8 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
  * `npm install`(only first time)
  * `npm run`
  * Visit http://localhost:4200
+
+ ## Testing some scenarios with fake backend
+
+ * save user with nickname 'exception@devmail.com' to simulate an error from backend
+

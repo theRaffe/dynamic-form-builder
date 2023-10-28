@@ -12,12 +12,14 @@ server.use(jsonServer.bodyParser);
 
 server.post("/v1/user", (req, res, next) => {
     const payload = req.body;
-    // console.log({requestBody : payload, fullRequest: req });
-    if (payload.nickname === "exception@devmail.com") {
+    console.log({requestBody : payload, fullRequest: req });
+    if (payload.generalInfo.nickname === "exception@devmail.com") {
+      setTimeout(() => {
         res.status(500).send({
             message: "Unexpected error/exception at backend",
         });
-        return;
+      }, 3000);
+      return;
     }
 
     const {

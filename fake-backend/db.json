@@ -33,7 +33,7 @@
                 "children": [
                     {
                         "name": "department",
-                        "title": "Area de Interes",
+                        "title": "Department",
                         "type": "mat-input-select",
                         "validations": {
                             "required": true
@@ -78,7 +78,7 @@
                     },
                     {
                         "name": "experience",
-                        "title": "Nivel de experiencia",
+                        "title": "Experience",
                         "type": "mat-input-radio",
                         "validations": {
                             "required": true

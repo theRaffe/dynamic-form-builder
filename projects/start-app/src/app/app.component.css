@@ -1,11 +1,10 @@
 .main-app {
     display: flex;
     align-items: center;
-    justify-content: center;
     flex-flow: column;
     row-gap: .5rem;
     height: 100vh;
-    widows: 100vw;
+    width: 100%;
 }
 .main-app .removeScroll {
     overflow: hidden;
